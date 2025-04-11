@@ -1,0 +1,276 @@
+%-------------------------
+% Rezume, a latex resume template for developers
+% Author : Nanu Panchamurthy
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+
+% Hope this resume template helps you land an awesome job. If you found this helpful, please consider starring the github repo here, .
+%-------------------------
+
+
+
+%------------PACKAGES----------------
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{verbatim} % reimplements the "verbatim" and "verbatim*" environments
+
+\usepackage{titlesec} % provides an interface to sectioning commands i.e. custom elements
+
+\usepackage{color} % provides both foreground and background color management
+
+\usepackage{enumitem} % provides control over enumerate, itemize and description
+
+\usepackage{fancyhdr} % provides extensive facilities for constructing headers, footers and also controlling their use
+
+\usepackage{tabularx} % defines an environment tabularx, extension of "tabular" with an extra designator x, paragraph like column whose width automatically expands to fill the width of the environment
+
+\usepackage{latexsym} % provides mathematical symbols
+
+\usepackage{marvosym} % provides martin vogel's symbol font which contains various symbols
+
+\usepackage[empty]{fullpage} % sets margins to one inch and removes headers, footers etc..
+
+\usepackage[hidelinks]{hyperref} % removes color and shadow of hyperlinks
+
+\usepackage[normalem]{ulem} % provides "\ul" (uline) command which will break at line breaks
+
+\usepackage[english]{babel} % provides culturally determined typographical rules for wide range of languages
+%-----------------------------------------
+
+\input glyphtounicode % converts glyph names to unicode
+\pdfgentounicode=1 % ensures pdfs generated are ats readable
+
+%----------FONT OPTIONS-------------------
+\usepackage[default]{sourcesanspro} % uses the font source sans pro
+\urlstyle{same} % changes url font from default urlfont to font being used by the document
+%-----------------------------------------
+
+
+%----------MARGIN OPTIONS-----------------
+\pagestyle{fancy} % set page style to one configured by fancyhdr
+\fancyhf{} % clear all header and footer fields
+
+\renewcommand{\headrulewidth}{0in} % sets thickness of linerule under header to zero
+\renewcommand{\footrulewidth}{0in} % sets thickness of linerule over footer to zero
+
+\setlength{\tabcolsep}{0in} % sets thickness of column separator in tables to zero
+
+% origin of the document is one inch from the top and from and the left
+% oddsidemargin and evensidemargin both refer to the left margin
+% right margin is indirectly set using oddsidemargin
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\topmargin}{-0.5in}
+
+\addtolength{\textwidth}{1.0in} % sets width of text area in the page to one inch
+\addtolength{\textheight}{1.0in} % sets height of text area in the page to one inch
+
+\raggedbottom{} % makes all pages the height of current page, no extra vertical space added
+\raggedright{} % makes all pages the width of current page, no extra horizontal space added
+%------------------------------------------
+
+
+%--------SECTIONING COMMANDS---------
+% \titleformat{<command>}
+%   [<shape>]{<format>}{<label>}{<sep>}
+%     {<before-code>}[<after-code>]
+
+% command is the sectioning command to be redefined
+% shape is the style of the font; scshape stands for small caps style
+% format is the format to be applied to whole title- label and text; absent here
+% label defines the label
+% sep is the horizontal separation between label and title body
+% before-code is the code to be executed before
+% after-code is the code to be executed after
+
+\titleformat{\section}
+  {\scshape\large}{}
+    {0em}{\color{blue}}[\color{black}\titlerule\vspace{0pt}]
+%-------------------------------------
+
+
+%--------REDEFINITIONS----------------
+% redefines the style of the bullet point
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+% redefines the underline depth to 2pt
+\renewcommand{\ULdepth}{2pt}
+%-------------------------------------
+
+
+%--------CUSTOM COMMANDS--------------
+%\vspace{} defines a vertical space of given size, modifying this in custom commands can help stretch or shrink resume to remove or add content
+
+% resumeItem renders a bullet point
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+% commands to start and end itemization of resumeItem, rightmargin set to 0.11in to avoid the overflow of resumetItem beyond whatever resumeItemHeading is being used
+\newcommand{\resumeItemListStart}{\begin{itemize}[rightmargin=0.11in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+% resumeSectionType renders a bolded type to be used under a section, used as skill type here, middle element is used to keep ":"s in the same vertical line
+\newcommand{\resumeSectionType}[3]{
+  \item\begin{tabular*}{0.96\textwidth}[t]{
+    p{0.15\linewidth}p{0.02\linewidth}p{0.81\linewidth}
+  }
+    \textbf{#1} & #2 & #3
+  \end{tabular*}\vspace{-2pt}
+}
+
+% resumeTrioHeading renders three elements in three columns with second element being italicized and first element bolded, can be used for projects with three elements
+\newcommand{\resumeTrioHeading}[3]{
+  \item\small{
+    \begin{tabular*}{0.96\textwidth}[t]{
+      l@{\extracolsep{\fill}}c@{\extracolsep{\fill}}r
+    }
+      \textbf{#1} & \textit{#2} & #3
+    \end{tabular*}
+  }
+}
+
+% resumeQuadHeading renders four elements in a two columns with the second row being italicized and first element of first row bolded, can be used for experience and projects with four elements
+\newcommand{\resumeQuadHeading}[4]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}
+}
+
+% resumeQuadHeadingChild renders the second row of resumeQuadHeading, can be used for experience if different roles in the same company need to added
+\newcommand{\resumeQuadHeadingChild}[2]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{\small#1} & {\small#2} \\
+  \end{tabular*}
+}
+
+% commands to start and end itemization of resumeQuadHeading, lefmargin for left indent of 0.15in for resumeItems
+\newcommand{\resumeHeadingListStart}{
+  \begin{itemize}[leftmargin=0.15in, label={}]
+}
+\newcommand{\resumeHeadingListEnd}{\end{itemize}}
+%-------------------------------------------
+
+
+%__________________RESUME____________________
+% You can rearrange sections in any order you may prefer
+\begin{document}
+
+%-----------CONTACT DETAILS------------------
+% Make sure all the details are correct, you can add more links in the first row of second column if needed
+
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{\Huge K Siva Sekhar \vspace{2pt}} & % row = 1, col = 1
+    Location: Chittoor, Andhra Pradesh, India \\ % row = 1, col = 2
+  \href{https://www.linkedin.com/in/siva-sekhar-kondudru/}{\uline{LinkedIn}} $|$ % row = 2, col = 1
+  \href{https://github.com/siva12170}{\uline{GitHub}} $|$ % row = 2, col = 1
+  \href{https://leetcode.com/u/kl2200031233/}{\uline{Leetcode}} & % row = 2, col = 1
+  Email: \href{mailto:2200031233cseh@gmail.com}{\uline{2200031233cseh@gmail.com}} $|$ % row = 2, col = 2
+  Mobile: 9490924582 \\ % row = 2, col = 2
+\end{tabular*}
+%--------------------------------------------
+
+
+%-----------SUMMARY--------------------------
+% Keep this short, simple and straigth to point
+
+\section{Full Stack Developer}
+\small{
+  I am a highly skilled web developer with over \textbf{2 years of experience} in \textbf{HTML, CSS, JavaScript, and PHP}. I have knowledge of popular frameworks such as \textbf{React and Angular} and experience with REST APIs.
+}
+%--------------------------------------------
+
+
+%--------------SKILLS------------------------
+% Add or remove resumeSectionTypes according to your needs
+
+\section{Technical Skills}
+  \resumeHeadingListStart{}
+    \resumeSectionType{Languages}{:}{JavaScript, Java, HTML, CSS}
+    \resumeSectionType{Frameworks}{:}{React.js, Angular, Express, Node.js}
+    \resumeSectionType{Libraries}{:}{Material, Redux, React Router}
+    \resumeSectionType{Databases}{:}{MongoDB, PostgreSQL}
+    \resumeSectionType{Dev Tools}{:}{Visual Studio Code, Git, Gitlab}
+  \resumeHeadingListEnd{}
+%--------------------------------------------
+
+
+%-----------EXPERIENCE-----------------------
+% Distill all your talking points to small bullet points which follow the pattern "challenge-action-result" for maximum efficiency. Try to quantify (use numbers) your points whenver possible, highlist words of importance
+
+\section{Experience}
+\resumeHeadingListStart{}
+  \resumeQuadHeading{AWS Data Engineer}{Apr 2022 – 2024}
+  {Anycompany}{Remote -- AICTE Virtual – Vijayawada, A.P, INDIA}
+    \resumeItemListStart{}
+      
+      \resumeItem{Gained expertise in data engineering and AWS cloud foundations during an internship at AICTE.}
+      
+    \resumeItemListEnd{}
+\resumeHeadingListEnd{}
+%---------------------------------------------
+
+
+%-----------EDUCATION-------------------------
+% Well-aligned table format for education details
+
+\section{Education}
+\begin{center}
+    \renewcommand{\arraystretch}{1.3} % Adjusts row height for better spacing
+    \setlength{\tabcolsep}{6pt} % Adjusts column padding for more space
+    \begin{tabularx}{0.93\textwidth} { | X | X | X | c | }
+        \hline
+        \textbf{Course} & \textbf{Institution} & \textbf{Board/University} & \textbf{Percentage} \\
+        \hline
+        B.Tech (CSE) & Koneru Lakshmaiah University & KLU & 93.1\% \\
+        \hline
+        Intermediate (12th) & Vignanasudha Junior College & BIEAP & 94.9\% \\
+        \hline
+        Matriculation (10th) & Camford English High School & SSC & 99\% \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+%----------------------------------------------
+\section{Projects}
+  \resumeHeadingListStart{}
+      \resumeTrioHeading{\href{https://github.com/siva12170/online_voting_system}{\uline{Online Voting System}}}{React.js,  Node.js, MongoDB}{\href{https://github.com/siva12170/PMK-WEBSITE-TDP-.git}{\uline{Source Code}}}
+      \resumeItemListStart{}
+        \resumeItem{Developed secure online voting platform with JWT authentication and bcrypt for password hashing.}
+        \resumeItem{Implemented real-time vote counting and MongoDB for scalable data storage.}
+        \resumeItem{Optimized application for performance, handling a high volume of concurrent users.}
+      \resumeItemListEnd{}
+    \resumeTrioHeading{\href{https://github.com/siva12170/PMK-WEBSITE-TDP-.git}{\uline{Enhancing Citizen-Politician Engagement}}}{React.js, MySQL Git}{\href{https://github.com/siva12170/PMK-WEBSITE-TDP-.git}{\uline{Source Code}}}
+      \resumeItemListStart{}
+        \resumeItem{Designed and developed a clean and modern website using HTML, CSS, and JavaScript.}
+        \resumeItem{Utilized \textbf{responsive design} to ensure compatibility across all devices}
+        \resumeItem{Deployed on GitHub pages via GitHub Actions}
+      \resumeItemListEnd{}
+
+      \resumeTrioHeading{\href{https://github.com/siva12170/vyuha_main}{\uline{VYUHA Knowledge Portal}}}{HTML, CSS, JS}{\href{https://github.com/siva12170/vyuha_main}{\uline{Source Code}}}
+      \resumeItemListStart{}
+        \resumeItem{A catalyst for knowledge exchange, personal growth, community engagement, and industry integration, fostering global prosperity.}
+        \resumeItem{Engineered an interactive web application using React.js and Node.js.}
+        \resumeItem{Implemented responsive design principles to provide a seamless user experience on all devices.}
+      \resumeItemListEnd{}
+  \resumeHeadingListEnd{}
+%--------------------------------------------
+
+
+%----------------OTHERS----------------------
+% You can add your acheivements, accolades, certifications etc. here.
+%----------------CERTIFICATIONS----------------------
+\section{Certifications}
+\resumeItemListStart
+  \resumeItem{\href{https://www.linkedin.com/posts/siva-sekhar-kondudru_aws-certified-solutions-architect-associate-activity-7301969106331652096-APdg?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEXHoGkBRv19sSSrvygDLucTRumeBdVS7N0}{\uline{AWS Certified Solutions Architect – Associate}}}
+  \resumeItem{\href{https://www.linkedin.com/posts/siva-sekhar-kondudru_aws-academy-graduate-aws-academy-cloud-activity-7160619518732423168-bZpo?utm_source=share&utm_medium=member_desktop}{\uline{AWS Cloud Practitioner}}}
+  \resumeItem{\href{https://drive.google.com/file/d/1M46Jr0lnhjoyjLmgjWNSoRC_2T-whgTN/view?usp=sharing}{\uline{Fintech Professional India}}}
+  \resumeItem{\href{https://www.linkedin.com/posts/siva-sekhar-kondudru_oracle-certification-activity-7229883725252022274-ihwM?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEXHoGkBRv19sSSrvygDLucTRumeBdVS7N0}{\uline{Oracle Cloud Infrastructure 2023 Certified Architect Associate}}}
+  \resumeItem{\href{https://www.linkedin.com/posts/siva-sekhar-kondudru_aicte-certificate-activity-7205616902826557440-sxfe?utm_source=share&utm_medium=member_desktop}{\uline{AWS Data Engineering Virtual Internship}}}
+  \resumeItem{\uline{Oracle Cloud Infrastructure 2024 Generative AI Certified Professional}}
+\resumeItemListEnd{}
+
+%--------------------------------------------
+\end{document}
